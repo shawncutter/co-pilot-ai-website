@@ -1,2 +1,3 @@
-# Redirect www to apex domain
-https://www.co-pilot.ai/* https://co-pilot.ai/:splat 301
+# Cloudflare Pages redirects
+# Note: Only relative paths (e.g. /old /new) are allowed here.
+# Domain redirects (like www to apex) should be configured in the Cloudflare Custom Domains dashboard.
