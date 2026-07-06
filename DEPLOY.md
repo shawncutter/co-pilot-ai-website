@@ -71,9 +71,9 @@ The application section directs applicants to an external Google Form. To update
 2. Get the public link (e.g. `https://docs.google.com/forms/d/e/.../viewform`).
 3. In `index.html`, find this line inside the `#apply` section:
    ```html
-   <a href="YOUR_GOOGLE_FORM_URL" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size:1.1rem;padding:1rem 2.5rem;text-decoration:none">
+   <a href="https://docs.google.com/forms/d/e/1FAIpQLSfFvtLic1GOtlJEe8vhbppkiox76nAbINvOABJrgSRTAl98iw/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size:1.1rem;padding:1rem 2.5rem;text-decoration:none">
    ```
-4. Replace `YOUR_GOOGLE_FORM_URL` with your Google Form link.
+4. Verify the Google Form link is configured correctly.
 5. Re-upload the updated `index.html` to Cloudflare Pages.
 
 ## Step 5: Future Updates
@@ -97,8 +97,7 @@ The application section directs applicants to an external Google Form. To update
 - [ ] Verify site loads at `*.pages.dev` URL
 - [ ] Connect `co-pilot.ai` custom domain
 - [ ] Connect `www.co-pilot.ai` (redirects to apex)
-- [ ] Verify HTTPS works
-- [ ] Create Google Form and update the `YOUR_GOOGLE_FORM_URL` link in `index.html`
+- [x] Create Google Form and update the link in `index.html` (Done)
 - [ ] Test the link on the live site
 - [ ] Submit sitemap to Google Search Console
 - [ ] Test on mobile (iPhone + Android)
