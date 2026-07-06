@@ -1,5 +1,2 @@
 # Redirect www to apex domain
 https://www.co-pilot.ai/* https://co-pilot.ai/:splat 301
-
-# SPA fallback (all routes serve index.html)
-/* /index.html 200

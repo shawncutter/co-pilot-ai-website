@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Co-Pilots AI — AI Factory Studio | Builders-Only Venture Sprint | June 2026</title>
-<meta name="description" content="Builders-only venture sprint. Bring an idea. Build a working prototype in 48 hours. Get scored by real evaluators. Top projects move forward as real companies. June 2026, Fort Myers FL."/>
+<title>Co-Pilots AI — AI Factory Studio | Builders-Only Venture Sprint | August 2026</title>
+<meta name="description" content="Builders-only venture sprint. Bring an idea. Build a working prototype in 48 hours. Get scored by real evaluators. Top projects move forward as real companies. August 2026, Fort Myers FL."/>
 <meta name="keywords" content="AI hackathon, venture sprint, AI prototype, builders event, startup sprint, Fort Myers, AI Factory Studio, Co-Pilots AI"/>
 <meta name="author" content="Co-Pilots AI"/>
 <meta name="robots" content="index, follow"/>
@@ -17,11 +17,13 @@
 <meta property="og:url" content="https://co-pilot.ai"/>
 <meta property="og:site_name" content="Co-Pilots AI"/>
 <meta property="og:locale" content="en_US"/>
+<meta property="og:image" content="https://co-pilot.ai/og-image.png"/>
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Co-Pilots AI — Builders-Only Venture Sprint"/>
-<meta name="twitter:description" content="Bring an idea. Build a prototype. Get scored. Top projects move forward. June 2026, Fort Myers FL."/>
+<meta name="twitter:description" content="Bring an idea. Build a prototype. Get scored. Top projects move forward. August 2026, Fort Myers FL."/>
+<meta name="twitter:image" content="https://co-pilot.ai/og-image.png"/>
 
 <!-- Favicon (inline SVG) -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0A'/%3E%3Ctext x='4' y='23' font-family='system-ui' font-weight='700' font-size='18' fill='%23FF6B2B'%3ECP%3C/text%3E%3C/svg%3E"/>
@@ -31,6 +33,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 
+<!-- Progressive Enhancement JS flag -->
+<script>document.documentElement.classList.add('js')</script>
+
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
 {
@@ -38,7 +43,7 @@
   "@type": "Event",
   "name": "AI Factory Studio",
   "description": "A builders-only venture sprint that uses AI to rapidly turn vetted ideas into working prototypes and advance the strongest concepts into real companies.",
-  "startDate": "2026-06",
+  "startDate": "2026-08",
   "location": {
     "@type": "Place",
     "name": "Sanibel Harbour Yacht Club",
@@ -74,7 +79,7 @@
   --white:#FFFFFF;
   --teal:#00D4AA;
   --blue:#3B82F6;
-  --red:#FF4D4D;
+  --red:#FF6B6B;
 }
 html{scroll-behavior:smooth}
 body{
@@ -252,8 +257,8 @@ section{padding:5rem 2rem}
 }
 
 /* SCROLL ANIMATIONS */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
+.js .reveal.visible{opacity:1;transform:translateY(0)}
 .reveal-delay-1{transition-delay:0.1s}
 .reveal-delay-2{transition-delay:0.2s}
 .reveal-delay-3{transition-delay:0.3s}
@@ -411,103 +416,60 @@ section{padding:5rem 2rem}
 .faq-arrow{transition:transform 0.3s;font-size:0.8rem;color:var(--gray);flex-shrink:0;margin-left:1rem}
 .faq-item.open .faq-arrow{transform:rotate(180deg)}
 
-/* APPLICATION FORM */
+/* APPLICATION CTA */
 #apply{background:var(--dark2)}
-.form-container{max-width:800px;margin:0 auto}
-.form-progress{
-  display:flex;gap:0.5rem;margin-bottom:2.5rem;
+.apply-container{max-width:700px;margin:0 auto;text-align:center}
+.apply-card{
+  background:var(--dark3);
+  border:1px solid rgba(255,107,43,0.25);
+  border-radius:12px;
+  padding:3rem 2rem;
+  margin-top:2.5rem;
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);
 }
-.form-progress-step{
-  flex:1;height:4px;border-radius:4px;
-  background:rgba(255,255,255,0.08);transition:background 0.3s;
+.apply-card h3{
+  font-size:1.5rem;
+  font-weight:700;
+  margin-bottom:1rem;
 }
-.form-progress-step.active{background:var(--orange)}
-.form-progress-step.done{background:var(--teal)}
-.form-step{display:none}
-.form-step.active{display:block}
-.form-step h2{font-size:1.5rem;font-weight:700;margin-bottom:0.5rem}
-.form-step .step-desc{color:var(--gray);margin-bottom:2rem;font-size:0.95rem}
-.form-notice{
-  background:rgba(255,184,0,0.08);
-  border:1px solid rgba(255,184,0,0.24);
+.apply-card p{
+  color:var(--gray);
+  margin-bottom:2rem;
+  font-size:1rem;
+  line-height:1.6;
+}
+.apply-requirements{
+  text-align:left;
+  max-width:480px;
+  margin:0 auto 2.5rem;
+  background:var(--dark);
+  padding:1.5rem;
   border-radius:8px;
+  border:1px solid rgba(255,255,255,0.05);
+}
+.apply-requirements h4{
+  font-size:0.85rem;
+  color:var(--orange);
+  text-transform:uppercase;
+  margin-bottom:0.75rem;
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:0.5px;
+}
+.apply-requirements ul{
+  list-style:none;
+}
+.apply-requirements li{
+  font-size:0.9rem;
   color:var(--light);
-  font-size:0.9rem;
-  margin:-1rem 0 2rem;
-  padding:1rem;
+  margin-bottom:0.5rem;
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
 }
-.form-error{
-  display:none;
-  background:rgba(255,77,77,0.1);
-  border:1px solid rgba(255,77,77,0.35);
-  border-radius:8px;
-  color:#ffb3b3;
-  font-size:0.9rem;
-  margin-bottom:1.25rem;
-  padding:0.9rem 1rem;
-}
-.form-error.show{display:block}
-.field{margin-bottom:1.5rem}
-.field label{
-  display:block;font-weight:500;font-size:0.9rem;margin-bottom:0.5rem;
-}
-.field label .req{color:var(--orange)}
-.field .helper{font-size:0.8rem;color:var(--gray);margin-top:0.3rem}
-input[type="text"],input[type="email"],input[type="url"],textarea,select{
-  width:100%;padding:0.75rem 1rem;
-  background:var(--dark);border:1px solid rgba(255,255,255,0.1);
-  border-radius:8px;color:var(--white);font-size:0.95rem;
-  font-family:'Space Grotesk',sans-serif;
-  transition:border-color 0.2s;
-}
-input:focus,textarea:focus,select:focus{
-  outline:none;border-color:var(--orange);
-  box-shadow:0 0 0 3px rgba(255,107,43,0.15);
-}
-textarea{min-height:100px;resize:vertical}
-select{appearance:none;cursor:pointer;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238A8A8A' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 1rem center;
-}
-select option{background:var(--dark);color:var(--white)}
-.checkbox-group{display:flex;flex-wrap:wrap;gap:0.75rem}
-.checkbox-group label{
-  display:flex;align-items:center;gap:0.5rem;
-  background:var(--dark);border:1px solid rgba(255,255,255,0.08);
-  border-radius:6px;padding:0.6rem 1rem;
-  cursor:pointer;font-size:0.9rem;font-weight:400;
-  transition:all 0.2s;user-select:none;
-}
-.checkbox-group label:hover{border-color:rgba(255,107,43,0.3)}
-.checkbox-group input:checked + span{color:var(--orange)}
-.checkbox-group input{accent-color:var(--orange)}
-.form-nav{display:flex;justify-content:space-between;margin-top:2.5rem}
-.form-nav button{
-  padding:0.75rem 2rem;border-radius:8px;font-weight:600;font-size:0.95rem;
-  cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:all 0.2s;
-}
-.form-nav .btn-back{
-  background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--light);
-}
-.form-nav .btn-back:hover{border-color:rgba(255,255,255,0.4)}
-.form-nav .btn-next{
-  background:var(--orange);border:none;color:var(--white);
-}
-.form-nav .btn-next:hover{background:var(--orange-dark)}
-.form-nav .btn-next:disabled{opacity:0.5;cursor:not-allowed}
-.email-fallback{
-  display:none;
-  margin-top:2rem;
-}
-.email-fallback.show{display:block}
-.email-fallback a{
-  display:inline-flex;
-  background:var(--orange);
-  border-radius:8px;
-  color:var(--white);
-  font-weight:600;
-  padding:0.85rem 1.4rem;
-  text-decoration:none;
+.apply-requirements li::before{
+  content:'→';
+  color:var(--orange);
+  font-weight:bold;
 }
 
 /* BACK TO TOP */
@@ -613,7 +575,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline:none}
 <!-- HERO -->
 <section class="hero" aria-labelledby="hero-heading">
   <div class="hero-inner fade-up">
-    <div class="hero-tag">June 2026 &middot; Fort Myers, FL</div>
+    <div class="hero-tag">August 2026 &middot; Fort Myers, FL</div>
     <h1 id="hero-heading">We are each other's <span class="accent">Co-Pilots.</span><br/>AI does the rest.</h1>
     <p class="hero-sub">
       <strong>AI Factory Studio</strong> is a builders-only venture sprint. Bring an idea. Build a working prototype in 48 hours. Get scored by real evaluators. <strong>Top projects move forward as real companies.</strong>
@@ -882,251 +844,33 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline:none}
 <!-- APPLICATION FORM -->
 <section id="apply" aria-labelledby="apply-heading">
   <div class="section-inner">
-    <div class="form-container">
+    <div class="apply-container">
       <div class="section-tag">// apply</div>
       <h2 class="section-title reveal" id="apply-heading">Ready to build?</h2>
-      <p class="section-desc reveal">Applications are reviewed on a rolling basis. You'll hear from us within 2 weeks.</p>
+      <p class="section-desc reveal">Join the August 2026 cohort of elite builders in Fort Myers, Florida.</p>
 
-      <div class="form-progress" role="progressbar" aria-label="Form progress" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4">
-        <div class="form-progress-step active" id="prog-1"></div>
-        <div class="form-progress-step" id="prog-2"></div>
-        <div class="form-progress-step" id="prog-3"></div>
-        <div class="form-progress-step" id="prog-4"></div>
+      <div class="apply-card reveal">
+        <h3>Submit Your Application</h3>
+        <p>Applications are reviewed on a rolling basis. Space is strictly limited to 15-25 curated builders to ensure a high-signal environment.</p>
+        
+        <div class="apply-requirements">
+          <h4>What you'll need:</h4>
+          <ul>
+            <li>LinkedIn profile &amp; optional GitHub / portfolio links</li>
+            <li>1-3 AI-native startup or prototype ideas</li>
+            <li>Details on what you have shipped in the last 12 months</li>
+            <li>Availability for our August 2026 cohort dates</li>
+          </ul>
+        </div>
+
+        <a href="YOUR_GOOGLE_FORM_URL" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size:1.1rem;padding:1rem 2.5rem;text-decoration:none">
+          Open Google Form Application &rarr;
+        </a>
+        
+        <p style="color:var(--gray);margin-top:2rem;font-size:0.9rem;margin-bottom:0">
+          Questions? Email <a href="mailto:shawn@energiacres.com" style="color:var(--orange);text-decoration:none">shawn@energiacres.com</a>
+        </p>
       </div>
-
-      <form id="appForm" method="POST" novalidate>
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true"/>
-        <div class="form-error" id="formError" role="alert" aria-live="assertive"></div>
-
-        <!-- STEP 1: ABOUT YOU -->
-        <div class="form-step active" id="step-1">
-          <h2>About You</h2>
-          <p class="step-desc">Tell us who you are and what you've built.</p>
-
-          <div class="field">
-            <label for="f-name">Full Name <span class="req">*</span></label>
-            <input type="text" id="f-name" name="name" required placeholder="Your full name" autocomplete="name"/>
-          </div>
-          <div class="field">
-            <label for="f-email">Email <span class="req">*</span></label>
-            <input type="email" id="f-email" name="email" required placeholder="you@company.com" autocomplete="email"/>
-          </div>
-          <div class="field">
-            <label for="f-location">Location <span class="req">*</span></label>
-            <input type="text" id="f-location" name="location" required placeholder="City, State/Country"/>
-          </div>
-          <div class="field">
-            <label for="f-role">Current Role / Title <span class="req">*</span></label>
-            <input type="text" id="f-role" name="role" required placeholder='e.g., "Senior ML Engineer at Acme"'/>
-          </div>
-          <div class="field">
-            <label for="f-linkedin">LinkedIn <span class="req">*</span></label>
-            <input type="url" id="f-linkedin" name="linkedin" required placeholder="https://linkedin.com/in/you"/>
-          </div>
-          <div class="field">
-            <label for="f-github">GitHub / GitLab</label>
-            <input type="url" id="f-github" name="github" placeholder="https://github.com/you"/>
-            <p class="helper">Optional. Skip if not applicable.</p>
-          </div>
-          <div class="field">
-            <label for="f-portfolio">Portfolio / Other Links</label>
-            <input type="url" id="f-portfolio" name="portfolio" placeholder="Your site, Dribbble, product links, etc."/>
-          </div>
-          <div class="field">
-            <label for="f-shipped">What have you shipped in the last 12 months? <span class="req">*</span></label>
-            <textarea id="f-shipped" name="shipped" required placeholder="Be specific. We want to know what you actually built, launched, or operated. 2-4 sentences."></textarea>
-          </div>
-          <div class="field">
-            <label>Core Skills (select up to 3) <span class="req">*</span></label>
-            <div class="checkbox-group" data-required-group="skills" data-max="3" data-label="Core Skills">
-              <label><input type="checkbox" name="skills" value="ai-ml"/><span>AI/ML</span></label>
-              <label><input type="checkbox" name="skills" value="fullstack"/><span>Full-Stack</span></label>
-              <label><input type="checkbox" name="skills" value="backend"/><span>Backend/Infra</span></label>
-              <label><input type="checkbox" name="skills" value="frontend"/><span>Frontend/UI</span></label>
-              <label><input type="checkbox" name="skills" value="design"/><span>Product Design</span></label>
-              <label><input type="checkbox" name="skills" value="architecture"/><span>Architecture</span></label>
-              <label><input type="checkbox" name="skills" value="domain"/><span>Domain Expert</span></label>
-              <label><input type="checkbox" name="skills" value="gtm"/><span>GTM/Growth</span></label>
-              <label><input type="checkbox" name="skills" value="ops"/><span>Operations</span></label>
-              <label><input type="checkbox" name="skills" value="founder"/><span>Founder</span></label>
-            </div>
-          </div>
-          <div class="field">
-            <label for="f-why">Why do you want to participate? <span class="req">*</span></label>
-            <textarea id="f-why" name="why" required placeholder="What are you looking to get out of this? Be direct."></textarea>
-          </div>
-          <div class="field">
-            <label>Availability (June 2026) <span class="req">*</span></label>
-            <div class="checkbox-group" data-required-group="avail" data-label="Availability">
-              <label><input type="checkbox" name="avail" value="jun6"/><span>Jun 6-8</span></label>
-              <label><input type="checkbox" name="avail" value="jun13"/><span>Jun 13-15</span></label>
-              <label><input type="checkbox" name="avail" value="jun20"/><span>Jun 20-22</span></label>
-              <label><input type="checkbox" name="avail" value="jun27"/><span>Jun 27-29</span></label>
-              <label><input type="checkbox" name="avail" value="flex"/><span>Flexible</span></label>
-            </div>
-          </div>
-          <div class="field">
-            <label for="f-source">How did you hear about us?</label>
-            <select id="f-source" name="source">
-              <option value="">Select one</option>
-              <option value="invite">Direct invitation</option>
-              <option value="linkedin">LinkedIn</option>
-              <option value="referral">Referral</option>
-              <option value="twitter">Twitter/X</option>
-              <option value="slack">Slack community</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
-          <div class="form-nav">
-            <div></div>
-            <button type="button" class="btn-next" onclick="goStep(2)">Next: Your Idea &rarr;</button>
-          </div>
-        </div>
-
-        <!-- STEP 2: IDEA -->
-        <div class="form-step" id="step-2">
-          <h2>Your Idea</h2>
-          <p class="step-desc">At least 1 idea is required. Make it specific, make it buildable, make it AI-native.</p>
-
-          <div class="field">
-            <label for="f-idea-title">Working Title <span class="req">*</span></label>
-            <input type="text" id="f-idea-title" name="idea_title" required placeholder="Give it a name"/>
-          </div>
-          <div class="field">
-            <label for="f-idea-problem">Problem Statement <span class="req">*</span></label>
-            <textarea id="f-idea-problem" name="idea_problem" required placeholder="What problem are you solving? Who feels the pain? How bad is it?"></textarea>
-          </div>
-          <div class="field">
-            <label for="f-idea-who">Who has this problem? <span class="req">*</span></label>
-            <textarea id="f-idea-who" name="idea_who" required placeholder='"Everyone" is not an answer. Be specific.' style="min-height:70px"></textarea>
-          </div>
-          <div class="field">
-            <label for="f-idea-why">Why now? <span class="req">*</span></label>
-            <textarea id="f-idea-why" name="idea_why_now" required placeholder="What changed? New AI capability? Regulation? Cost curve? Market timing?" style="min-height:70px"></textarea>
-          </div>
-          <div class="field">
-            <label for="f-idea-ai">AI-First Approach <span class="req">*</span></label>
-            <textarea id="f-idea-ai" name="idea_ai" required placeholder="How does AI do the core work? Not 'we add AI to X' — how does AI actually power this?"></textarea>
-          </div>
-          <div class="field">
-            <label for="f-idea-demo">Demo Definition <span class="req">*</span></label>
-            <textarea id="f-idea-demo" name="idea_demo" required placeholder="What would a working prototype look like in a 5-minute demo?"></textarea>
-          </div>
-          <div class="field">
-            <label for="f-idea-distro">Distribution Wedge <span class="req">*</span></label>
-            <textarea id="f-idea-distro" name="idea_distro" required placeholder="How does this get its first 100 users? Be specific." style="min-height:70px"></textarea>
-          </div>
-          <div class="field">
-            <label for="f-idea-risks">Key Risks</label>
-            <textarea id="f-idea-risks" name="idea_risks" placeholder="Privacy, safety, compliance, feasibility, competition. Be honest." style="min-height:70px"></textarea>
-          </div>
-          <div class="field">
-            <label for="f-idea-data">Data Requirements</label>
-            <input type="text" id="f-idea-data" name="idea_data" placeholder='e.g., "Public datasets only" or "Requires proprietary access to X"'/>
-          </div>
-
-          <div class="form-nav">
-            <button type="button" class="btn-back" onclick="goStep(1)">&larr; Back</button>
-            <button type="button" class="btn-next" onclick="goStep(3)">Next: Preferences &rarr;</button>
-          </div>
-        </div>
-
-        <!-- STEP 3: PREFERENCES -->
-        <div class="form-step" id="step-3">
-          <h2>Experience Preferences</h2>
-          <p class="step-desc">Optional. Helps us plan. None of this affects scoring or selection.</p>
-
-          <div class="field">
-            <label>How do you prefer to use restore blocks?</label>
-            <div class="checkbox-group">
-              <label><input type="radio" name="restore_pref" value="build"/><span>Keep building</span></label>
-              <label><input type="radio" name="restore_pref" value="water"/><span>Water time</span></label>
-              <label><input type="radio" name="restore_pref" value="wellness"/><span>Wellness/spa</span></label>
-              <label><input type="radio" name="restore_pref" value="mixed"/><span>Mixed</span></label>
-              <label><input type="radio" name="restore_pref" value="unsure"/><span>Not sure</span></label>
-            </div>
-          </div>
-          <div class="field">
-            <label>Optional add-ons you'd consider</label>
-            <div class="checkbox-group">
-              <label><input type="checkbox" name="addons" value="water"/><span>Water Access</span></label>
-              <label><input type="checkbox" name="addons" value="wellness"/><span>Wellness</span></label>
-              <label><input type="checkbox" name="addons" value="flow"/><span>Stay-in-Flow Workspace</span></label>
-              <label><input type="checkbox" name="addons" value="concierge"/><span>Concierge</span></label>
-              <label><input type="checkbox" name="addons" value="none"/><span>None</span></label>
-            </div>
-          </div>
-          <div class="field">
-            <label>Domain interests (select all)</label>
-            <div class="checkbox-group">
-              <label><input type="checkbox" name="domains" value="energy"/><span>Energy</span></label>
-              <label><input type="checkbox" name="domains" value="food"/><span>Food Systems</span></label>
-              <label><input type="checkbox" name="domains" value="health"/><span>Healthcare</span></label>
-              <label><input type="checkbox" name="domains" value="fintech"/><span>Fintech</span></label>
-              <label><input type="checkbox" name="domains" value="logistics"/><span>Logistics</span></label>
-              <label><input type="checkbox" name="domains" value="climate"/><span>Climate</span></label>
-              <label><input type="checkbox" name="domains" value="education"/><span>Education</span></label>
-              <label><input type="checkbox" name="domains" value="saas"/><span>Enterprise SaaS</span></label>
-              <label><input type="checkbox" name="domains" value="consumer"/><span>Consumer</span></label>
-              <label><input type="checkbox" name="domains" value="govtech"/><span>GovTech</span></label>
-            </div>
-          </div>
-
-          <div class="form-nav">
-            <button type="button" class="btn-back" onclick="goStep(2)">&larr; Back</button>
-            <button type="button" class="btn-next" onclick="goStep(4)">Next: Confirm &rarr;</button>
-          </div>
-        </div>
-
-        <!-- STEP 4: CONFIRM -->
-        <div class="form-step" id="step-4">
-          <h2>Almost there.</h2>
-          <p class="step-desc">Review and confirm the following, then submit.</p>
-
-          <div class="field">
-            <label style="display:flex;align-items:flex-start;gap:0.75rem;cursor:pointer">
-              <input type="checkbox" name="ack_ownership" required style="margin-top:4px;accent-color:var(--orange);flex-shrink:0"/>
-              <span>I understand that prototypes built during AI Factory Studio may be subject to a shared ownership and contribution-based equity structure. Details will be in the participation agreement.</span>
-            </label>
-          </div>
-          <div class="field">
-            <label style="display:flex;align-items:flex-start;gap:0.75rem;cursor:pointer">
-              <input type="checkbox" name="ack_eval" required style="margin-top:4px;accent-color:var(--orange);flex-shrink:0"/>
-              <span>I understand that evaluation and runner selection is at the discretion of the committee and advisor network.</span>
-            </label>
-          </div>
-          <div class="field">
-            <label style="display:flex;align-items:flex-start;gap:0.75rem;cursor:pointer">
-              <input type="checkbox" name="ack_agreement" required style="margin-top:4px;accent-color:var(--orange);flex-shrink:0"/>
-              <span>I am willing to sign a participation agreement covering IP, confidentiality, and contribution accounting.</span>
-            </label>
-          </div>
-          <div class="field">
-            <label style="display:flex;align-items:flex-start;gap:0.75rem;cursor:pointer">
-              <input type="checkbox" name="ack_addons" required style="margin-top:4px;accent-color:var(--orange);flex-shrink:0"/>
-              <span>I understand that optional add-on purchases never affect scoring, selection, or ownership.</span>
-            </label>
-          </div>
-
-          <div class="form-nav">
-            <button type="button" class="btn-back" onclick="goStep(3)">&larr; Back</button>
-            <button type="submit" class="btn-next" id="submitBtn" style="background:var(--teal)">Submit Application &#10003;</button>
-          </div>
-        </div>
-
-        <!-- SUCCESS -->
-        <div class="form-step" id="step-success" style="text-align:center;padding:3rem 0">
-          <div style="font-size:3rem;margin-bottom:1rem">&#10003;</div>
-          <h2 id="successTitle" style="color:var(--teal)">Application Submitted</h2>
-          <p id="successMessage" style="color:var(--gray);margin-top:1rem;font-size:1.05rem">Thanks for applying to AI Factory Studio. We review on a rolling basis.<br/>You'll hear from us within 2 weeks.</p>
-          <div class="email-fallback" id="emailFallback">
-            <a id="emailDraftLink" href="mailto:shawn@energiacres.com">Send Application by Email</a>
-          </div>
-          <p style="color:var(--gray);margin-top:2rem;font-size:0.9rem">Questions? Email <a href="mailto:shawn@energiacres.com" style="color:var(--orange)">shawn@energiacres.com</a></p>
-        </div>
-
-      </form>
     </div>
   </div>
 </section>
@@ -1135,7 +879,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline:none}
 
 <!-- FOOTER -->
 <footer role="contentinfo">
-  <p><strong style="color:var(--white)">Co-Pilots<span style="color:var(--orange)">.ai</span></strong> &middot; AI Factory Studio &middot; June 2026 &middot; Fort Myers, FL</p>
+  <p><strong style="color:var(--white)">Co-Pilots<span style="color:var(--orange)">.ai</span></strong> &middot; AI Factory Studio &middot; August 2026 &middot; Fort Myers, FL</p>
   <p style="margin-top:0.5rem">Bring an idea. Build a prototype. Get scored. Top projects move forward.</p>
   <p style="margin-top:1rem"><a href="mailto:shawn@energiacres.com">shawn@energiacres.com</a></p>
 </footer>
@@ -1144,10 +888,6 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline:none}
 <button class="back-to-top" id="backToTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
 
 <script>
-/* ===== CONFIG ===== */
-const FORM_ENDPOINT = ""; // Set your Formspree endpoint: https://formspree.io/f/YOUR_ID
-const CONTACT_EMAIL = "shawn@energiacres.com";
-
 /* ===== MOBILE NAV ===== */
 function toggleMobileNav(){
   const nav = document.getElementById('mobileNav');
@@ -1191,204 +931,6 @@ function toggleFaq(btn){
   item.classList.toggle('open');
   btn.setAttribute('aria-expanded', !wasOpen);
 }
-
-/* ===== FORM ===== */
-let currentStep = 1;
-const form = document.getElementById('appForm');
-const formError = document.getElementById('formError');
-
-const fieldLabels = {
-  name:'Full Name',
-  email:'Email',
-  location:'Location',
-  role:'Current Role / Title',
-  linkedin:'LinkedIn',
-  shipped:'What have you shipped in the last 12 months?',
-  why:'Why do you want to participate?',
-  idea_title:'Idea Working Title',
-  idea_problem:'Problem Statement',
-  idea_who:'Who has this problem?',
-  idea_why_now:'Why now?',
-  idea_ai:'AI-First Approach',
-  idea_demo:'Demo Definition',
-  idea_distro:'Distribution Wedge',
-  ack_ownership:'Ownership Acknowledgment',
-  ack_eval:'Evaluation Acknowledgment',
-  ack_agreement:'Participation Agreement Acknowledgment',
-  ack_addons:'Add-on Independence Acknowledgment'
-};
-
-function goStep(n){
-  if(n > currentStep && !validateStep(currentStep)) return;
-  setStep(n);
-}
-
-function setStep(n){
-  clearError();
-  document.getElementById('step-'+currentStep).classList.remove('active');
-  document.getElementById('step-'+n).classList.add('active');
-  for(let i=1;i<=4;i++){
-    const el=document.getElementById('prog-'+i);
-    el.classList.remove('active','done');
-    if(i<n) el.classList.add('done');
-    if(i===n) el.classList.add('active');
-  }
-  const progress = document.querySelector('.form-progress');
-  if(progress) progress.setAttribute('aria-valuenow', n);
-  currentStep=n;
-  window.scrollTo({top:document.getElementById('apply').offsetTop-80,behavior:'smooth'});
-}
-
-function validateStep(stepNumber, options){
-  options = options || {focus:true};
-  const step=document.getElementById('step-'+stepNumber);
-  const fields=Array.from(step.querySelectorAll('input,textarea,select'))
-    .filter(function(f){return f.name!=='_gotcha'});
-
-  for(const field of fields){
-    if(!field.checkValidity()){
-      const label=fieldLabels[field.name]||'This field';
-      showError(field.validity.valueMissing ? label+' is required.' : label+' needs a valid value.');
-      if(options.focus) field.focus();
-      return false;
-    }
-  }
-
-  const requiredGroups=Array.from(step.querySelectorAll('[data-required-group]'));
-  for(const group of requiredGroups){
-    const checkedCount=group.querySelectorAll('input:checked').length;
-    const label=group.dataset.label||'this section';
-    const max=Number(group.dataset.max||0);
-    if(checkedCount===0){
-      showError('Select at least one option for '+label+'.');
-      if(options.focus) group.querySelector('input')?.focus();
-      return false;
-    }
-    if(max && checkedCount > max){
-      showError(label+' allows up to '+max+' selections.');
-      if(options.focus) group.querySelector('input:checked')?.focus();
-      return false;
-    }
-  }
-
-  clearError();
-  return true;
-}
-
-function validateAllSteps(){
-  for(let step=1;step<=4;step++){
-    if(!validateStep(step,{focus:false})){
-      setStep(step);
-      validateStep(step,{focus:true});
-      return false;
-    }
-  }
-  return true;
-}
-
-function showError(message){
-  formError.textContent=message;
-  formError.classList.add('show');
-}
-
-function clearError(){
-  formError.textContent='';
-  formError.classList.remove('show');
-}
-
-function formDataToObject(data){
-  const obj={};
-  for(const [key,value] of data.entries()){
-    if(key==='_gotcha') continue;
-    if(obj[key]){
-      if(Array.isArray(obj[key])) obj[key].push(value);
-      else obj[key]=[obj[key],value];
-    } else {
-      obj[key]=value;
-    }
-  }
-  return obj;
-}
-
-function buildEmailBody(obj){
-  const lines=['AI Factory Studio Application','','Submitted from co-pilot.ai',''];
-  Object.entries(obj).forEach(function([key,value]){
-    const label=fieldLabels[key]||key.replace(/_/g,' ');
-    const normalized=Array.isArray(value)?value.join(', '):value;
-    lines.push(label+':');
-    lines.push(normalized||'[blank]');
-    lines.push('');
-  });
-  return lines.join('\n');
-}
-
-function showSuccess(mode,obj){
-  document.getElementById('step-'+currentStep).classList.remove('active');
-  document.getElementById('step-success').classList.add('active');
-  document.querySelectorAll('.form-progress-step').forEach(function(el){el.classList.add('done')});
-
-  if(mode==='email'){
-    document.getElementById('successTitle').textContent='Application Ready';
-    document.getElementById('successMessage').innerHTML='Applications are being collected by email for now.<br/>Use the button below to send your application to Shawn.';
-    const body=encodeURIComponent(buildEmailBody(obj));
-    document.getElementById('emailDraftLink').href='mailto:'+CONTACT_EMAIL+'?subject='+encodeURIComponent('AI Factory Studio Application')+'&body='+body;
-    document.getElementById('emailFallback').classList.add('show');
-  } else {
-    document.getElementById('successTitle').textContent='Application Submitted';
-    document.getElementById('successMessage').innerHTML="Thanks for applying to AI Factory Studio. We review on a rolling basis.<br/>You'll hear from us within 2 weeks.";
-    document.getElementById('emailFallback').classList.remove('show');
-  }
-}
-
-async function submitForm(event){
-  event.preventDefault();
-  clearError();
-
-  if(!validateAllSteps()) return;
-
-  const data=new FormData(form);
-  if(data.get('_gotcha')) return;
-
-  const obj=formDataToObject(data);
-  const submitBtn=document.getElementById('submitBtn');
-
-  if(!FORM_ENDPOINT){
-    showSuccess('email',obj);
-    return;
-  }
-
-  submitBtn.disabled=true;
-  submitBtn.textContent='Submitting...';
-
-  try{
-    const response=await fetch(FORM_ENDPOINT,{
-      method:'POST',
-      headers:{'Accept':'application/json'},
-      body:data
-    });
-
-    if(!response.ok) throw new Error('Submission failed');
-    showSuccess('submitted',obj);
-    form.reset();
-  } catch(error){
-    submitBtn.disabled=false;
-    submitBtn.innerHTML='Submit Application &#10003;';
-    showError('Something went wrong. Please email Shawn directly at '+CONTACT_EMAIL+'.');
-  }
-}
-
-document.querySelectorAll('[data-max]').forEach(function(group){
-  group.addEventListener('change',function(event){
-    const max=Number(group.dataset.max||0);
-    const checked=group.querySelectorAll('input:checked');
-    if(max && checked.length > max){
-      event.target.checked=false;
-      showError((group.dataset.label||'This section')+' allows up to '+max+' selections.');
-    }
-  });
-});
-
-form.addEventListener('submit',submitForm);
 
 /* ===== ACTIVE NAV HIGHLIGHT ===== */
 const navLinks=document.querySelectorAll('.nav-links a:not(.nav-cta)');
