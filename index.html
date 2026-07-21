@@ -658,6 +658,15 @@ section{padding:5rem 2rem}
 .reserve-tier li::before{content:'\2713';color:var(--teal);font-weight:bold;flex-shrink:0}
 .rt-cta{justify-content:center;width:100%;text-align:center}
 .rt-soon{display:block;text-align:center;width:100%;padding:0.9rem 1rem;border-radius:8px;border:1px dashed rgba(255,255,255,0.16);color:var(--gray);font-size:0.85rem;font-weight:600;font-family:'JetBrains Mono',monospace;letter-spacing:0.3px}
+.deposit-terms{max-width:740px;margin-top:1.25rem;border:1px solid rgba(255,255,255,0.08);border-radius:8px;background:rgba(14,14,16,0.5)}
+.deposit-terms>summary{cursor:pointer;padding:0.9rem 1.2rem;font-family:'JetBrains Mono',monospace;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--copper-light);list-style:none}
+.deposit-terms>summary::-webkit-details-marker{display:none}
+.deposit-terms>summary::after{content:'+';float:right;color:var(--gray)}
+.deposit-terms[open]>summary::after{content:'\2013'}
+.deposit-terms .dt-body{padding:0 1.4rem 1.4rem}
+.deposit-terms h4{color:var(--white);font-size:0.9rem;margin:1.1rem 0 0.3rem;font-family:'Plus Jakarta Sans',sans-serif}
+.deposit-terms p{color:var(--gray);font-size:0.85rem;margin-bottom:0.5rem;line-height:1.65}
+.deposit-terms .dt-ph{color:var(--yellow);font-style:normal}
 .reserve-fineprint{color:var(--gray);font-size:0.82rem;max-width:740px;line-height:1.6}
 .reserve-fineprint em{color:var(--copper-light);font-style:italic}
 @media(max-width:768px){.reserve-tiers{grid-template-columns:1fr}}
@@ -1781,7 +1790,29 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline:none}
     </div>
 
     <p class="reveal" style="color:var(--light);font-size:0.95rem;max-width:740px;margin-bottom:1.25rem">Reservations open shortly &mdash; in the meantime, <a href="#apply" style="color:var(--copper-light);font-weight:600;text-decoration:none">apply below</a> to get on the list. Applicants get first access the moment lock-in opens.</p>
-    <p class="reserve-fineprint reveal">A deposit is a place-holder, not a purchase. It's fully refundable until the cohort is confirmed, and credited toward entry once you're selected. Final pricing, dates, and format mix are set the moment we hit the threshold. <em>(Refund and credit terms shown here are placeholders &mdash; confirm the exact policy before you launch.)</em></p>
+    <p class="reserve-fineprint reveal">A deposit reserves your place in line &mdash; it's not a ticket purchase. It's <strong>fully refundable</strong> until the cohort is confirmed, and if you're selected it's <strong>credited 100% toward your entry</strong>. If the event doesn't reach its builder threshold, or you apply and aren't selected, you get every dollar back. Reserving doesn't guarantee admission &mdash; selection is still based on your application. <a href="#deposit-terms" onclick="var d=document.getElementById('deposit-terms');if(d){d.open=true;}" style="color:var(--copper-light);text-decoration:none">Full terms &darr;</a></p>
+
+    <details class="deposit-terms reveal" id="deposit-terms">
+      <summary>Reservation deposit &mdash; plain-English terms</summary>
+      <div class="dt-body">
+        <h4>What it is</h4>
+        <p>When you reserve a spot, your deposit holds your place in line for the cohort. It's a <strong>refundable reservation</strong> &mdash; not a ticket, and not a purchase of goods or services.</p>
+        <h4>The amounts</h4>
+        <p>$50 (Lock Your Spot) or $100 (Priority Line). Priority moves you higher in the selection order and gives first pick of format and logistics. It does <em style="font-style:normal;color:var(--light)">not</em> guarantee admission.</p>
+        <h4>It's fully refundable if&hellip;</h4>
+        <p>(a) the cohort doesn't reach its builder threshold and the event doesn't run; (b) you apply and aren't selected; or (c) you change your mind and request a refund before the cohort is confirmed. Pre-confirmation refunds are returned in full within <span class="dt-ph">[X business days]</span>.</p>
+        <h4>If you're selected</h4>
+        <p>Once you accept your spot, your deposit is credited 100% toward your entry fee. Any remaining balance is due <span class="dt-ph">[by date / on these terms]</span>.</p>
+        <h4>Reserving isn't admission</h4>
+        <p>Selection is based on your application and fit. A deposit reserves your place in line, not a seat in the room.</p>
+        <h4>If the details change</h4>
+        <p>Final pricing, dates, city, and format are confirmed the moment we hit the threshold. If any of these change materially from what you signed up for, you may withdraw for a full refund.</p>
+        <h4>Payments</h4>
+        <p>Processed securely by Stripe. We never see or store your card details.</p>
+        <h4>Refunds &amp; questions</h4>
+        <p>Email <span class="dt-ph">[reservations@co-pilot.ai]</span>. These terms are a plain-English summary and may be updated before launch. <span class="dt-ph">[Governed by the laws of the State of ___.]</span></p>
+      </div>
+    </details>
   </div>
 </section>
 
