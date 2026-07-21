@@ -84,6 +84,7 @@ gtag('config', 'G-QLKKGLZSB0');
 
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none !important}
 :root{
   --copper:#C27D56;
   --copper-light:#DF9B74;
@@ -656,6 +657,7 @@ section{padding:5rem 2rem}
 .reserve-tier li{color:var(--gray);font-size:0.9rem;padding:0.45rem 0;display:flex;gap:0.6rem;align-items:flex-start}
 .reserve-tier li::before{content:'\2713';color:var(--teal);font-weight:bold;flex-shrink:0}
 .rt-cta{justify-content:center;width:100%;text-align:center}
+.rt-soon{display:block;text-align:center;width:100%;padding:0.9rem 1rem;border-radius:8px;border:1px dashed rgba(255,255,255,0.16);color:var(--gray);font-size:0.85rem;font-weight:600;font-family:'JetBrains Mono',monospace;letter-spacing:0.3px}
 .reserve-fineprint{color:var(--gray);font-size:0.82rem;max-width:740px;line-height:1.6}
 .reserve-fineprint em{color:var(--copper-light);font-style:italic}
 @media(max-width:768px){.reserve-tiers{grid-template-columns:1fr}}
@@ -1757,8 +1759,10 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline:none}
           <li>Fully refundable if the cohort doesn't fill &mdash; or if you're not selected</li>
           <li>Credited toward your entry once you're in</li>
         </ul>
-        <!-- TODO: replace href with your Stripe Payment Link / Eventbrite for the $50 deposit -->
-        <a href="https://buy.stripe.com/REPLACE_WITH_50_LINK" class="btn-primary rt-cta">Reserve for $50 &rarr;</a>
+        <!-- TO ENABLE: paste your Stripe Payment Link in href, remove the `hidden` attribute
+             from the <a>, and delete the "opening soon" <span> below. -->
+        <a href="https://buy.stripe.com/REPLACE_WITH_50_LINK" class="btn-primary rt-cta" hidden>Reserve for $50 &rarr;</a>
+        <span class="rt-soon">Reservations open soon</span>
       </div>
       <div class="reserve-tier priority reveal reveal-delay-1">
         <div class="rt-flag">Priority</div>
@@ -1769,11 +1773,14 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline:none}
           <li>Moves you up the selection order when we finalize the cohort</li>
           <li>First pick of format (48h or 96h) and the room block</li>
         </ul>
-        <!-- TODO: replace href with your Stripe Payment Link / Eventbrite for the $100 deposit -->
-        <a href="https://buy.stripe.com/REPLACE_WITH_100_LINK" class="btn-primary rt-cta">Reserve for $100 &rarr;</a>
+        <!-- TO ENABLE: paste your Stripe Payment Link in href, remove the `hidden` attribute
+             from the <a>, and delete the "opening soon" <span> below. -->
+        <a href="https://buy.stripe.com/REPLACE_WITH_100_LINK" class="btn-primary rt-cta" hidden>Reserve for $100 &rarr;</a>
+        <span class="rt-soon">Reservations open soon</span>
       </div>
     </div>
 
+    <p class="reveal" style="color:var(--light);font-size:0.95rem;max-width:740px;margin-bottom:1.25rem">Reservations open shortly &mdash; in the meantime, <a href="#apply" style="color:var(--copper-light);font-weight:600;text-decoration:none">apply below</a> to get on the list. Applicants get first access the moment lock-in opens.</p>
     <p class="reserve-fineprint reveal">A deposit is a place-holder, not a purchase. It's fully refundable until the cohort is confirmed, and credited toward entry once you're selected. Final pricing, dates, and format mix are set the moment we hit the threshold. <em>(Refund and credit terms shown here are placeholders &mdash; confirm the exact policy before you launch.)</em></p>
   </div>
 </section>
