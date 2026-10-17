@@ -1,14 +1,28 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "co-pilot-ai-website",
+  "main": "src/worker.js",
   "compatibility_date": "2026-07-21",
+  "compatibility_flags": ["nodejs_compat"],
   "observability": {
     "enabled": true
   },
   "assets": {
-    "directory": "."
+    // The public site. Anything outside ./public (docs, the Worker source) is never served.
+    "directory": "./public",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
   },
-  "compatibility_flags": [
-    "nodejs_compat"
-  ]
+  "vars": {
+    // Where every sign-up is sent. SecondBrain syncs this inbox.
+    "LEAD_NOTIFY_TO": "shawn@energiacres.com",
+    "LEAD_FROM": "Co-Pilot <hello@co-pilot.ai>"
+  }
+  // Secrets (set with `npx wrangler secret put NAME`, never committed):
+  //   RESEND_API_KEY              sends each sign-up to LEAD_NOTIFY_TO
+  //   SECONDBRAIN_WEBHOOK_URL     optional: SecondBrain's visitor-message endpoint, when live
+  //   SECONDBRAIN_WEBHOOK_SECRET  optional: signs that webhook (HMAC-SHA256)
+  // Optional backup copy of every sign-up, after `npx wrangler kv namespace create LEADS`:
+  //   "kv_namespaces": [{ "binding": "LEADS", "id": "<id from that command>" }]
 }
