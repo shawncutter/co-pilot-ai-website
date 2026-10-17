@@ -54,7 +54,7 @@
 <p class="kicker">Edition 01: city and dates coming soon</p>
 <h2 id="nx-h" class="display foil">Be first in.</h2>
 <p class="lede">Builders, join the waitlist. Businesses and sponsors, tell us the problem or <a href="/book/30">book 30 minutes</a>.</p>
-<form action="/api/lead" method="post" data-lead="studio" aria-label="Studio waitlist" class="form"><div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<form action="/api/lead" method="post" data-lead="studio" aria-label="Studio waitlist" class="form"><input type="hidden" name="kind" value="studio"><div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
 <div class="field"><label for="s-e">Email</label><input id="s-e" name="email" type="email" required autocomplete="email"></div>
 <div class="field"><label for="s-r">I am</label><select id="s-r" name="role"><option value="builder">A builder</option><option value="business">A business with a challenge</option><option value="sponsor">A sponsor or investor</option></select></div>
 <button type="submit" class="btn btn-foil">Join the Studio waitlist</button>

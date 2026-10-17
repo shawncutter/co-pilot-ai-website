@@ -1,8 +1,6 @@
 // Co-Pilot site forms: every form with data-lead posts to /api/lead.
 // The Worker forwards each sign-up to SecondBrain (see src/worker.js).
 (function () {
-  var loadedAt = Date.now();
-
   var DONE = {
     waitlist: {
       title: "You're on the list.",
@@ -57,7 +55,7 @@
 
     var button = form.querySelector('button[type="submit"]');
     var data = new FormData(form);
-    var payload = { kind: kind, page: location.pathname, elapsed_ms: Date.now() - loadedAt };
+    var payload = { kind: kind, page: location.pathname };
     data.forEach(function (v, k) {
       payload[k] = String(v);
     });

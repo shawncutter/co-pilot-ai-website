@@ -60,10 +60,9 @@ export function cleanLead(raw) {
   if (!raw || typeof raw !== "object") return { error: "Bad request." };
   const kind = String(raw.kind || "");
   if (!KINDS[kind]) return { error: "Unknown form." };
-  // Honeypot: real visitors never see or fill this field.
+  // Honeypot: real visitors never see or fill this field. (No timing check: browser autofill
+  // lets a real person submit in under a second, and those leads must never be dropped.)
   if (raw.website) return { spam: true };
-  // Submitted faster than a person could type: treat as a bot.
-  if (raw.elapsed_ms !== undefined && Number(raw.elapsed_ms) < 1500) return { spam: true };
 
   const lead = { kind };
   for (const [key, max] of Object.entries(FIELDS)) {
@@ -160,15 +159,21 @@ async function saveCopy(lead, env) {
 }
 
 async function handleLead(request, env) {
+  // site.js posts JSON. Without JavaScript the browser posts the form itself; answer that with a
+  // page instead of JSON.
+  const native = !(request.headers.get("content-type") || "").includes("application/json");
+  const reply = (body, status) =>
+    native ? Response.redirect(new URL(body.ok ? "/thanks/" : "/sorry/", request.url).toString(), 303) : json(body, status);
+
   let raw;
   try {
     raw = await readBody(request);
   } catch {
-    return json({ ok: false, error: "Bad request." }, 400);
+    return reply({ ok: false, error: "Bad request." }, 400);
   }
   const { lead, error, spam } = cleanLead(raw);
-  if (spam) return json({ ok: true });
-  if (error) return json({ ok: false, error }, 400);
+  if (spam) return reply({ ok: true }, 200);
+  if (error) return reply({ ok: false, error }, 400);
 
   lead.id = crypto.randomUUID();
   lead.received_at = new Date().toISOString();
@@ -180,7 +185,7 @@ async function handleLead(request, env) {
   if (env.LEADS) jobs.push(["kv", saveCopy(lead, env)]);
   if (!jobs.length) {
     console.error("lead not delivered: no destination configured", lead.kind);
-    return json({ ok: false, error: "Not configured." }, 503);
+    return reply({ ok: false, error: "Not configured." }, 503);
   }
   const results = await Promise.allSettled(jobs.map(([, p]) => p));
   const delivered = [];
@@ -188,8 +193,8 @@ async function handleLead(request, env) {
     if (r.status === "fulfilled") delivered.push(jobs[i][0]);
     else console.error("lead delivery failed", jobs[i][0], String(r.reason));
   });
-  if (!delivered.length) return json({ ok: false, error: "Could not save that. Please try again." }, 502);
-  return json({ ok: true, id: lead.id });
+  if (!delivered.length) return reply({ ok: false, error: "Could not save that. Please try again." }, 502);
+  return reply({ ok: true, id: lead.id }, 200);
 }
 
 function bookingRedirect(url) {

@@ -46,8 +46,9 @@ Collective application) posts to `/api/lead`. The Worker forwards each one:
 3. **Backup copy** in the `LEADS` KV namespace, if bound.
 
 A sign-up succeeds if any one of these works. If none is configured, the form says so and offers
-a pre-filled email instead, so nothing is lost. Spam protection: a hidden honeypot field and a
-minimum fill time. Add Cloudflare Turnstile if spam shows up.
+a pre-filled email instead, so nothing is lost. Forms also work without JavaScript: the browser
+posts them directly and lands on /thanks/ or /sorry/. Spam protection is a hidden honeypot field;
+add Cloudflare Turnstile if spam shows up.
 
 ## One-time setup
 

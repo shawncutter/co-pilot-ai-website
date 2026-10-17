@@ -49,7 +49,7 @@
 <div class="w narrow center">
 <h2 id="ap-h" class="display foil">Build with us.</h2>
 <p class="lede">If you ship with AI every day and want to help others do the same, we'd love to meet you.</p>
-<form action="/api/lead" method="post" data-lead="collective" aria-label="Apply to the collective" class="form"><div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<form action="/api/lead" method="post" data-lead="collective" aria-label="Apply to the collective" class="form"><input type="hidden" name="kind" value="collective"><div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
 <div class="field"><label for="c-n">Name</label><input id="c-n" name="name" type="text" autocomplete="name"></div>
 <div class="field"><label for="c-e">Email</label><input id="c-e" name="email" type="email" required autocomplete="email"></div>
 <div class="field full"><label for="c-w">Show us something you built</label><input id="c-w" name="link" type="url"></div>

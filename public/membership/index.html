@@ -95,7 +95,7 @@
 <p class="lede">Tell me what you want to work on. I'll reply within one business day with a quote and times.</p>
 <p class="muted">Rather talk it through first? <a href="/book/intro">Book a 15-minute intro</a> and it goes straight on my calendar.</p>
 </div>
-<form action="/api/lead" method="post" data-lead="pricing" aria-label="Request 1:1 pricing" class="form form-light"><div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<form action="/api/lead" method="post" data-lead="pricing" aria-label="Request 1:1 pricing" class="form form-light"><input type="hidden" name="kind" value="pricing"><div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
 <div class="field"><label for="rq-n">Name</label><input id="rq-n" name="name" type="text" autocomplete="name"></div>
 <div class="field"><label for="rq-e">Email</label><input id="rq-e" name="email" type="email" required autocomplete="email"></div>
 <div class="field full"><label for="rq-t">What do you want to work on?</label><textarea id="rq-t" name="topic" required></textarea></div>
@@ -108,7 +108,7 @@
 <div class="w narrow center">
 <h2 id="wl-h" class="display foil">Get in early.</h2>
 <p class="lede">Founding members lock in $50 a month when doors open. Nothing is charged today.</p>
-<form action="/api/lead" method="post" data-lead="waitlist" aria-label="Join the waitlist" class="form"><div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<form action="/api/lead" method="post" data-lead="waitlist" aria-label="Join the waitlist" class="form"><input type="hidden" name="kind" value="waitlist"><div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
 <div class="field"><label for="wl-e">Email</label><input id="wl-e" name="email" type="email" required autocomplete="email"></div>
 <div class="field"><label for="wl-b">Type of business</label><select id="wl-b" name="business"><option value="">Choose one</option><option value="services">Services: agency, consulting, professional</option><option value="trades">Trades and field services</option><option value="retail">Retail, food and hospitality</option><option value="health">Health and wellness</option><option value="software">Software and tech</option><option value="manufacturing">Manufacturing and distribution</option><option value="other">Something else</option></select></div>
 <div class="field full"><label for="wl-q">What's your biggest AI question?</label><textarea id="wl-q" name="question"></textarea></div>

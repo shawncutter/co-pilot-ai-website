@@ -54,7 +54,7 @@
 <div class="w narrow center">
 <h2 id="tk-h" class="display foil">What could you build?</h2>
 <p class="lede">Tell us where you are and we'll reach out personally, or <a href="/book/30">book 30 minutes now</a>.</p>
-<form action="/api/lead" method="post" data-lead="founder" aria-label="Start a founder conversation" class="form"><div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<form action="/api/lead" method="post" data-lead="founder" aria-label="Start a founder conversation" class="form"><input type="hidden" name="kind" value="founder"><div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
 <div class="field"><label for="f-n">Name</label><input id="f-n" name="name" type="text" autocomplete="name"></div>
 <div class="field"><label for="f-e">Email</label><input id="f-e" name="email" type="email" required autocomplete="email"></div>
 <div class="field full"><label for="f-w">What are you building?</label><textarea id="f-w" name="building"></textarea></div>
