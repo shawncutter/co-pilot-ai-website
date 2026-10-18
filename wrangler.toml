@@ -1,0 +1,60 @@
+# Co-Pilot — operated by Phase 2 Labs LLC
+# Deploy:  npx wrangler deploy
+name = "copilots-coach"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Weekly drop: Mondays 13:00 UTC (9:00 am Eastern during daylight time).
+[triggers]
+crons = ["0 13 * * MON"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "coach-db"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"   # printed by: npx wrangler d1 create coach-db
+
+# Fan-out queue so every subscriber's drop is its own retried job.
+[[queues.producers]]
+binding = "DROP_QUEUE"
+queue = "coach-drops"
+
+[[queues.consumers]]
+queue = "coach-drops"
+max_batch_size = 5
+max_retries = 3
+
+[vars]
+APP_URL = "https://coach.co-pilot.ai"          # where this Worker is served
+LEGAL_ENTITY = "Phase 2 Labs LLC"
+EMAIL_FROM = "Co-Pilot <coach@co-pilot.ai>"
+EMAIL_REPLY_TO = "coach@co-pilot.ai"
+CORE_PRICE = "50"            # membership, per month
+COMMITMENT_MONTHS = "0"      # 0 = cancel anytime (current rate card); set N to require an N-month minimum
+CONSULTING_RATE = "500"      # 1:1 hourly rate, billed privately; the website says "Request pricing"
+SAMPLE_DAILY_CAP = "50"
+REDACT_MODEL_PASS = "1"
+# Words that must never reach a subscriber (clients, deals, partners). Comma-separated.
+REDACT_TERMS = "EnergiAcres,Energi Acres,Terrasow,GreenScreens,BMV Interactive,ProsperityTA,Zaykov"
+# Senders allowed to feed the capture inbox (e.g. your own addresses).
+CAPTURE_EMAIL_FROM = "shawn@energiacres.com"
+# Optional: comma-separated practitioner feeds (defaults: Simon Willison + One Useful Thing).
+# FRONTIER_FEEDS = "https://simonwillison.net/atom/everything/,https://www.oneusefulthing.org/feed"
+# Walkthrough videos hosted on Muse.ai (embed URLs). Every member sees all of them.
+MUSE_VIDEOS = '[]'
+# Model IDs — set each to the provider's CURRENT model id (see SETUP.md). A provider with no
+# key or no model id is simply skipped by the router.
+ANTHROPIC_MODEL = ""
+OPENAI_MODEL = ""
+GEMINI_MODEL = ""
+XAI_MODEL = ""
+OSS_MODEL = ""          # e.g. an OpenRouter id for Llama / Qwen / DeepSeek
+# OSS_BASE_URL = ""     # optional: your own OpenAI-compatible endpoint (MLX Serve, llama.cpp)
+X_POSTING = "0"         # set "1" to let the Grok bot post the weekly teaser on X
+
+# Secrets (set with `npx wrangler secret put NAME`, never committed):
+#   STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, STRIPE_PRICE_CORE, STRIPE_PRICE_CONSULTING, STRIPE_PORTAL_CONFIG
+#   RESEND_API_KEY, SESSION_SECRET, CAPTURE_TOKEN
+#   ANTHROPIC_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY, XAI_API_KEY, OSS_API_KEY
+#   CONSULTING_ALERT_EMAIL (where 1:1 requests and payments go), BOOKING_URL (your calendar link)
+#   Optional: STRIPE_CONSULTING_LINK (payment link id for 1:1 time), OPS_ALERT_EMAIL, XAI_SEARCH_JSON, X_USER_ACCESS_TOKEN

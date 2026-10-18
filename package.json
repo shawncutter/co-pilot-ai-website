@@ -1,0 +1,25 @@
+{
+  "name": "copilots-coach",
+  "version": "1.0.0",
+  "description": "Co-Pilot \u2014 adaptive weekly AI coaching membership (Phase 2 Labs LLC)",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node --test --no-warnings test/*.test.js",
+    "dev": "wrangler dev",
+    "db:init": "wrangler d1 execute coach-db --remote --file=schema.sql",
+    "deploy": "wrangler deploy",
+    "setup:stripe": "node scripts/setup-stripe.mjs",
+    "bill:hours": "node scripts/bill-hours.mjs"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "postal-mime": "^2.7.6"
+  },
+  "devDependencies": {
+    "wrangler": "^4.149.0"
+  },
+  "private": true,
+  "type": "module"
+}
