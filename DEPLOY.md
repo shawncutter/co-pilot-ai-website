@@ -62,7 +62,7 @@ add Cloudflare Turnstile if spam shows up.
 
 ```bash
 npx wrangler login
-npx wrangler secret put RESEND_API_KEY          # Resend key for the verified domain updates.shawncutter.com
+npx wrangler secret put RESEND_API_KEY          # Resend key; co-pilot.ai is a verified sending domain
 # optional, once SecondBrain's endpoint is ready:
 npx wrangler secret put SECONDBRAIN_WEBHOOK_URL
 npx wrangler secret put SECONDBRAIN_WEBHOOK_SECRET
@@ -70,8 +70,8 @@ npx wrangler secret put SECONDBRAIN_WEBHOOK_SECRET
 npx wrangler kv namespace create LEADS          # then add the binding it prints to wrangler.jsonc
 ```
 
-The sender is `LEAD_FROM` in `wrangler.jsonc` (`Co-Pilot <copilot@updates.shawncutter.com>`, on the
-Resend-verified domain updates.shawncutter.com).
+The sender is `LEAD_FROM` in `wrangler.jsonc` (`Co-Pilot <info@co-pilot.ai>`; co-pilot.ai is
+verified in Resend).
 
 ## Run it locally
 
