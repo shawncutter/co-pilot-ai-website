@@ -1,106 +1,89 @@
-# Co-Pilots AI — Cloudflare Pages Deployment Guide
+# co-pilot.ai: how the site runs
 
-## Folder Structure
+The site is a Cloudflare Worker with static assets, served at **co-pilot.ai** and
+**www.co-pilot.ai** (custom domains declared in `wrangler.jsonc`). Every push to `main` deploys it
+(Workers Builds, connected to this repo). Other branches get preview builds.
+
+`coach.co-pilot.ai` is a separate Worker: the members' app (checkout, portal, briefings). Its home
+page redirects here, so co-pilot.ai is the only public face.
+
+If a deploy fails with "hostname already in use", co-pilot.ai is still attached to the old
+Cloudflare Pages project: remove the custom domain there (Pages → co-pilot-ai → Custom domains),
+then retry the build.
 
 ```
-co-pilot.ai-website.ai/
-  index.html      ← Main website (single-file, all CSS/JS inlined)
-  404.html         ← Custom 404 page
-  _headers         ← Security headers + cache rules
-  _redirects       ← www→apex redirect + SPA fallback
-  robots.txt       ← Search engine crawl rules
-  sitemap.xml      ← Sitemap for SEO
-  DEPLOY.md        ← This file (not deployed)
+public/            the website, served as-is (nothing outside it is ever served)
+  index.html       Home
+  membership/      Membership
+  founders/        Founders
+  studio/          AI Factory Studio
+  collective/      The Collective
+  privacy/         Privacy
+  404.html         Not found
+  assets/          site.css and site.js (form handling)
+  _headers         security headers and CSP
+src/worker.js      /book/* links and the /api/lead endpoint
+wrangler.jsonc     Worker config, vars, and the list of secrets
 ```
 
-## Step 1: Create Cloudflare Pages Project
+## Bookings go to SecondBrain
 
-1. Log into **Cloudflare Dashboard** → Pages
-2. Click **Create a project** → **Direct Upload**
-3. Name the project: `co-pilot-ai`
-4. Drag the contents of this folder (all files except DEPLOY.md) into the upload area
-5. Click **Deploy site**
+Booking buttons use short links that the Worker redirects to SecondBrain's public scheduler:
 
-Your site will be live at `co-pilot-ai.pages.dev` within ~60 seconds.
+| Link | Goes to |
+|---|---|
+| `/book`, `/book/intro`, `/book/15` | `hey.shawncutter.com/schedule/15-minute-introduction` |
+| `/book/30` | `hey.shawncutter.com/schedule/30-minute-meeting` |
+| `/book/60` | `hey.shawncutter.com/schedule/60-minute-working-session` |
 
-## Step 2: Connect Custom Domain (co-pilot.ai)
+A booking there checks live free/busy, puts the meeting on shawn@energiacres.com's calendar, and
+SecondBrain sends the confirmations and notifications. To change where a button goes, edit
+`BOOKING` in `src/worker.js`.
 
-### If your domain is already on Cloudflare DNS:
-1. In the Pages project → **Custom domains** tab
-2. Click **Set up a custom domain**
-3. Enter `co-pilot.ai`
-4. Cloudflare auto-creates the required CNAME/A records
-5. Repeat for `www.co-pilot.ai`
+## Sign-ups go to SecondBrain
 
-### If your domain is with another registrar:
-1. In the Pages project → **Custom domains** tab
-2. Add `co-pilot.ai` and `www.co-pilot.ai`
-3. Cloudflare will show the required DNS records
-4. At your registrar, add these DNS records:
-   - **Type:** CNAME
-   - **Name:** `@` (or `co-pilot.ai`)
-   - **Target:** `co-pilot-ai.pages.dev`
-   - **TTL:** Auto
-   
-   And:
-   - **Type:** CNAME
-   - **Name:** `www`
-   - **Target:** `co-pilot-ai.pages.dev`
-   - **TTL:** Auto
+Every form on the site (waitlist, 1:1 pricing request, founder conversation, Studio waitlist,
+Collective application) posts to `/api/lead`. The Worker forwards each one:
 
-5. Wait for DNS propagation (usually 5-30 minutes, can take up to 48 hours)
+1. **Email** to `LEAD_NOTIFY_TO` (default `shawn@energiacres.com`, the inbox SecondBrain syncs),
+   sent with Resend. Reply-to is the visitor, so replying answers them directly.
+2. **Signed webhook** to `SECONDBRAIN_WEBHOOK_URL`, if set. Body:
+   `{"source":"co-pilot.ai","type":"lead.<kind>","lead":{...}}`. Header:
+   `x-co-pilot-signature: t=<unix>,v1=<hex HMAC-SHA256 of "<t>.<body>" keyed with SECONDBRAIN_WEBHOOK_SECRET>`.
+   Point it at SecondBrain's visitor-message endpoint once that is live.
+3. **Backup copy** in the `LEADS` KV namespace, if bound.
 
-### Better option — move DNS to Cloudflare:
-1. Add `co-pilot.ai` to your Cloudflare account (Free plan)
-2. Cloudflare gives you nameservers (e.g., `ada.ns.cloudflare.com`)
-3. At your domain registrar, update nameservers to Cloudflare's
-4. Wait for propagation
-5. Then do the Pages custom domain setup above (auto-creates records)
+A sign-up succeeds if any one of these works. If none is configured, the form says so and offers
+a pre-filled email instead, so nothing is lost. Forms also work without JavaScript: the browser
+posts them directly and lands on /thanks/ or /sorry/. Spam protection is a hidden honeypot field;
+add Cloudflare Turnstile if spam shows up.
 
-## Step 3: SSL/TLS
+## One-time setup
 
-Cloudflare Pages provides free SSL automatically. No config needed. Your site will be HTTPS by default.
+```bash
+npx wrangler login
+npx wrangler secret put RESEND_API_KEY          # Resend key; co-pilot.ai is a verified sending domain
+# optional, once SecondBrain's endpoint is ready:
+npx wrangler secret put SECONDBRAIN_WEBHOOK_URL
+npx wrangler secret put SECONDBRAIN_WEBHOOK_SECRET
+# optional backup copy of every sign-up:
+npx wrangler kv namespace create LEADS          # then add the binding it prints to wrangler.jsonc
+```
 
-If you moved DNS to Cloudflare, go to **SSL/TLS** in the dashboard and set mode to **Full (strict)**.
+The sender is `LEAD_FROM` in `wrangler.jsonc` (`Co-Pilot <info@co-pilot.ai>`; co-pilot.ai is
+verified in Resend).
 
-## Step 4: Connect Google Form
+## Run it locally
 
-The application section directs applicants to an external Google Form. To update this link:
+```bash
+npx wrangler dev        # http://localhost:8787
+```
 
-1. Create your Google Form for applicant screening.
-2. Get the public link (e.g. `https://docs.google.com/forms/d/e/.../viewform`).
-3. In `index.html`, find this line inside the `#apply` section:
-   ```html
-   <a href="https://docs.google.com/forms/d/e/1FAIpQLSfFvtLic1GOtlJEe8vhbppkiox76nAbINvOABJrgSRTAl98iw/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size:1.1rem;padding:1rem 2.5rem;text-decoration:none">
-   ```
-4. Verify the Google Form link is configured correctly.
-5. Re-upload the updated `index.html` to Cloudflare Pages.
+## Go-live checklist
 
-## Step 5: Future Updates
- 
-### Direct Upload (simplest):
-1. Edit `index.html` locally
-2. Go to Cloudflare Pages → your project → **Create new deployment**
-3. Upload the updated files
-4. New version is live in ~30 seconds
- 
-### Git Integration (recommended for ongoing changes):
-1. Push this folder to a GitHub/GitLab repo
-2. In Cloudflare Pages, reconnect the project to the repo
-3. Set build command to empty (no build needed — it's static HTML)
-4. Set output directory to `/` (root)
-5. Every push to `main` auto-deploys
- 
-## Go-Live Checklist
- 
-- [ ] Upload all files to Cloudflare Pages
-- [ ] Verify site loads at `*.pages.dev` URL
-- [ ] Connect `co-pilot.ai` custom domain
-- [ ] Connect `www.co-pilot.ai` (redirects to apex)
-- [x] Create Google Form and update the link in `index.html` (Done)
-- [ ] Test the link on the live site
-- [ ] Submit sitemap to Google Search Console
-- [ ] Test on mobile (iPhone + Android)
-- [ ] Test all nav links and scroll behavior
-- [ ] Verify 404 page works (visit /nonexistent)
-- [ ] Share link with committee for review
+- [ ] `RESEND_API_KEY` set; submit the waitlist form and see it arrive in SecondBrain
+- [ ] Book a test 15-minute intro from /membership/ and see it on the calendar
+- [ ] Check every page on a phone
+- [ ] Replace the sample briefing on /membership/ with a real one
+- [ ] Have counsel read /privacy/
+- [ ] Resubmit `https://co-pilot.ai/sitemap.xml` in Google Search Console
