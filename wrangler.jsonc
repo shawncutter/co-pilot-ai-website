@@ -7,12 +7,19 @@
   "observability": {
     "enabled": true
   },
+  // This Worker IS co-pilot.ai. Deploying attaches both hostnames to it.
+  "routes": [
+    { "pattern": "co-pilot.ai", "custom_domain": true },
+    { "pattern": "www.co-pilot.ai", "custom_domain": true }
+  ],
   "assets": {
     // The public site. Anything outside ./public (docs, the Worker source) is never served.
     "directory": "./public",
     "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    // Let the Worker see every request first (www → apex redirect, /book links, /api).
+    "run_worker_first": true
   },
   "vars": {
     // Where every sign-up is sent. SecondBrain syncs this inbox.

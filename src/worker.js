@@ -210,6 +210,12 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // One canonical address: www.co-pilot.ai → co-pilot.ai
+    if (url.hostname === "www.co-pilot.ai") {
+      url.hostname = "co-pilot.ai";
+      return Response.redirect(url.toString(), 301);
+    }
+
     if (url.pathname === "/api/lead") {
       if (request.method !== "POST") return json({ ok: false, error: "Method not allowed." }, 405);
       return handleLead(request, env);

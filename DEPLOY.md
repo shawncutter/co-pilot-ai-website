@@ -1,7 +1,15 @@
 # co-pilot.ai: how the site runs
 
-The site is a Cloudflare Worker with static assets. Every push to `main` deploys it
+The site is a Cloudflare Worker with static assets, served at **co-pilot.ai** and
+**www.co-pilot.ai** (custom domains declared in `wrangler.jsonc`). Every push to `main` deploys it
 (Workers Builds, connected to this repo). Other branches get preview builds.
+
+`coach.co-pilot.ai` is a separate Worker: the members' app (checkout, portal, briefings). Its home
+page redirects here, so co-pilot.ai is the only public face.
+
+If a deploy fails with "hostname already in use", co-pilot.ai is still attached to the old
+Cloudflare Pages project: remove the custom domain there (Pages → co-pilot-ai → Custom domains),
+then retry the build.
 
 ```
 public/            the website, served as-is (nothing outside it is ever served)
