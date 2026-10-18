@@ -111,7 +111,7 @@ export function leadEmail(lead, env) {
     rows.map(([k, v]) => `${k}: ${v}`).join("\n") +
     `\n\n${next}\nReply to this email to answer them directly.\n\nLead id: ${lead.id}`;
   return {
-    from: env.LEAD_FROM || "Co-Pilot <hello@co-pilot.ai>",
+    from: env.LEAD_FROM || "Co-Pilot <copilot@updates.shawncutter.com>",
     to: [env.LEAD_NOTIFY_TO || "shawn@energiacres.com"],
     reply_to: lead.email,
     subject,

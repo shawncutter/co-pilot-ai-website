@@ -24,7 +24,7 @@
   "vars": {
     // Where every sign-up is sent. SecondBrain syncs this inbox.
     "LEAD_NOTIFY_TO": "shawn@energiacres.com",
-    "LEAD_FROM": "Co-Pilot <hello@co-pilot.ai>"
+    "LEAD_FROM": "Co-Pilot <copilot@updates.shawncutter.com>"
   }
   // Secrets (set with `npx wrangler secret put NAME`, never committed):
   //   RESEND_API_KEY              sends each sign-up to LEAD_NOTIFY_TO
