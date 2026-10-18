@@ -10,3 +10,6 @@
 
 /*.svg
   Cache-Control: public, max-age=86400
+
+/og/*
+  Cache-Control: public, max-age=3600, must-revalidate
