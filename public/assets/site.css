@@ -30,6 +30,8 @@ a:hover{color:#fff}
 .nav nav a:hover,.nav nav a[aria-current]{color:#fff;border-bottom-color:var(--cu)}
 
 /* type */
+h1,h2,h3,.mega,.display{text-wrap:balance}
+.lede,.muted,p{text-wrap:pretty}
 .mega{font-weight:800;letter-spacing:-.055em;line-height:.92;font-size:clamp(54px,8.4vw,132px);margin:0 0 30px;padding-bottom:.04em}
 .display{font-weight:750;letter-spacing:-.04em;line-height:.98;font-size:clamp(40px,6vw,88px);margin:0 0 20px}
 .foil{background:var(--foil);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
@@ -79,7 +81,7 @@ h3,.h3{font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1.15;mar
 @media (prefers-reduced-motion:reduce){.stream-list{animation:none}html{scroll-behavior:auto}.btn{transition:none}}
 
 /* sections */
-.sec{padding:clamp(80px,11vw,150px) 0}
+.sec{padding:clamp(64px,8.5vw,112px) 0}
 .sec-dark{background:var(--void);color:#fff;border-bottom:1px solid var(--line)}
 .sec-light{background:var(--paper);color:var(--ink)}
 .sec-light .lede{color:#3a3a3c}.sec-light .muted{color:#5f5f64}
@@ -191,8 +193,14 @@ button[disabled]{opacity:.6;cursor:progress}
 }
 @media (max-width:640px){
   body{font-size:17px}
+  /* Phone: the header scrolls away instead of pinning. Pinned, it cost ~170px (20% of the screen);
+     now it is two compact rows at the top of the page only. */
+  .nav{position:static}
   .nav-in{gap:6px 18px;padding-top:8px;padding-bottom:8px}
-  .nav nav{order:3;width:100%;gap:18px;overflow-x:auto;white-space:nowrap;padding-bottom:4px}
+  .nav nav{order:3;width:100%;gap:22px;flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+  .nav nav::-webkit-scrollbar{display:none}
+  .nav nav a{display:inline-flex;align-items:center;min-height:44px;padding:0}
+  .foot-links a{display:inline-block;padding:12px 0}
   .stream-list{font-size:12.5px}
   .plan{padding:30px 24px}
 }
